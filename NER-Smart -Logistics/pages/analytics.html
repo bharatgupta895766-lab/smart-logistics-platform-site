@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics | NER Smart Logistics</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        .analytics-page {
+            padding: 24px;
+        }
+
+        .analytics-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .analytics-intro h2 {
+            margin: 0 0 6px;
+        }
+
+        .analytics-intro p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .analytics-status {
+            background: #ecfdf5;
+            color: #15803d;
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* KPI */
+
+        .analytics-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+            border-left: 4px solid #2563eb;
+        }
+
+        .kpi-card:nth-child(1) {
+            border-left-color: #0f766e;
+        }
+
+        .kpi-card:nth-child(2) {
+            border-left-color: #16a34a;
+        }
+
+        .kpi-card:nth-child(3) {
+            border-left-color: #f59e0b;
+        }
+
+        .kpi-card:nth-child(4) {
+            border-left-color: #dc2626;
+        }
+
+        .kpi-card span {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .kpi-card strong {
+            display: block;
+            font-size: 28px;
+            margin: 5px 0;
+        }
+
+        .kpi-card small {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        /* GRID */
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .analytics-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            margin: 0 0 5px;
+            font-size: 18px;
+        }
+
+        .panel-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .period-select {
+            border: 1px solid #dbe2ea;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: white;
+        }
+
+        /* CHART */
+
+        .chart-area {
+            height: 245px;
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            padding: 15px 5px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .chart-column {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-value {
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .chart-bar {
+            width: 42px;
+            max-width: 70%;
+            background: #2563eb;
+            border-radius: 7px 7px 0 0;
+            transition: 0.3s;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.75;
+        }
+
+        .chart-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* RISK */
+
+        .risk-distribution {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .risk-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 45px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .risk-row span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .distribution-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .distribution-fill {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .safe-fill {
+            width: 62%;
+            background: #16a34a;
+        }
+
+        .medium-fill {
+            width: 28%;
+            background: #f59e0b;
+        }
+
+        .high-fill {
+            width: 10%;
+            background: #dc2626;
+        }
+
+        .risk-row strong {
+            font-size: 13px;
+            text-align: right;
+        }
+
+        /* CORRIDORS */
+
+        .corridor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .corridor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .corridor-info strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .corridor-info span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .corridor-risk {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .risk-low {
+            color: #16a34a;
+        }
+
+        .risk-medium {
+            color: #d97706;
+        }
+
+        .risk-high {
+            color: #dc2626;
+        }
+
+        /* PERFORMANCE */
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .performance-card {
+            background: #f8fafc;
+            border-radius: 11px;
+            padding: 16px;
+        }
+
+        .performance-card span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .performance-card strong {
+            display: block;
+            font-size: 22px;
+            margin: 6px 0;
+        }
+
+        .performance-card small {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        /* INSIGHT */
+
+        .insight-panel {
+            margin-top: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .insight-panel h3 {
+            margin: 0 0 13px;
+            font-size: 15px;
+        }
+
+        .insight-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .insight-item {
+            background: white;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .insight-item span {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .insight-item strong {
+            font-size: 14px;
+        }
+
+        .analytics-disclaimer {
+            margin-top: 18px;
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        @media (max-width: 950px) {
+
+            .analytics-kpis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .analytics-kpis {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-intro {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .performance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-area {
+                gap: 6px;
+            }
+
+            .chart-bar {
+                width: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                NER
+            </div>
+
+            <div>
+                <h2>Smart Logistics</h2>
+                <span>North Eastern Region</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="../index.html" class="nav-item">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="map.html" class="nav-item">
+                <span>🗺️</span>
+                <span>Live Map</span>
+            </a>
+
+            <a href="vehicles.html" class="nav-item">
+                <span>🚚</span>
+                <span>Vehicle Tracking</span>
+            </a>
+
+            <a href="routes.html" class="nav-item">
+                <span>🛣️</span>
+                <span>Routes</span>
+            </a>
+
+            <a href="incidents.html" class="nav-item">
+                <span>🚨</span>
+                <span>Incidents</span>
+            </a>
+
+            <a href="alerts.html" class="nav-item">
+                <span>🔔</span>
+                <span>Alerts</span>
+            </a>
+
+            <a href="analytics.html" class="nav-item active">
+                <span>📊</span>
+                <span>Analytics</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Monitoring active</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Logistics Analytics</h1>
+
+                <p>
+                    Operational performance, route risk and logistics insights
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="analyticsSearch"
+                        placeholder="Search analytics..."
+                    >
+
+                </div>
+
+
+                <button class="notification-btn">
+
+                    🔔
+
+                    <span class="notification-count">
+                        5
+                    </span>
+
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-icon">
+                        OP
+                    </div>
+
+                    <div>
+                        <strong>Operations</strong>
+                        <small>Control Room</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+
+        <section class="analytics-page">
+
+
+            <!-- INTRO -->
+
+            <div class="analytics-intro">
+
+                <div>
+
+                    <h2>
+                        Logistics Intelligence Dashboard
+                    </h2>
+
+                    <p>
+                        Analyze fleet movement, route risk,
+                        delays and critical logistics corridors.
+                    </p>
+
+                </div>
+
+                <span class="analytics-status">
+                    ● Analytics updated
+                </span>
+
+            </div>
+
+
+            <!-- KPI -->
+
+            <div class="analytics-kpis">
+
+                <div class="kpi-card">
+
+                    <span>
+                        Delivery Success
+                    </span>
+
+                    <strong>
+                        94%
+                    </strong>
+
+                    <small>
+                        ↑ 6.2% improvement
+                    </small>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <span>
+                        On-Time Vehicles
+                    </span>
+
+                    <strong>
+                        78%
+                    </strong>
+
+                    <small>
+                        ↑ 4.8% this period
+                    </small>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <span>
+                        Average Delay
+                    </span>
+
+                    <strong>
+                        32 min
+                    </strong>
+
+                    <small>
+                        ↓ 11 min reduction
+                    </small>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <span>
+                        High-Risk Routes
+                    </span>
+
+                    <strong>
+                        05
+                    </strong>
+
+                    <small>
+                        Requires monitoring
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHART + RISK -->
+
+            <div class="analytics-grid">
+
+
+                <!-- ROUTE RISK TREND -->
+
+                <div class="analytics-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Route Risk Trend
+                            </h2>
+
+                            <p>
+                                Average corridor risk during the week
+                            </p>
+
+                        </div>
+
+
+                        <select class="period-select">
+
+                            <option>
+                                Last 7 Days
+                            </option>
+
+                            <option>
+                                Last 30 Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-area">
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">34%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:34%;"
+                            ></div>
+
+                            <span class="chart-label">Mon</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">41%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:41%;"
+                            ></div>
+
+                            <span class="chart-label">Tue</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">48%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:48%;"
+                            ></div>
+
+                            <span class="chart-label">Wed</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">63%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:63%;"
+                            ></div>
+
+                            <span class="chart-label">Thu</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">72%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:72%;"
+                            ></div>
+
+                            <span class="chart-label">Fri</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">55%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:55%;"
+                            ></div>
+
+                            <span class="chart-label">Sat</span>
+
+                        </div>
+
+
+                        <div class="chart-column">
+
+                            <span class="chart-value">43%</span>
+
+                            <div
+                                class="chart-bar"
+                                style="height:43%;"
+                            ></div>
+
+                            <span class="chart-label">Sun</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RISK DISTRIBUTION -->
+
+                <div class="analytics-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Route Risk Distribution
+                            </h2>
+
+                            <p>
+                                Current monitored corridors
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="risk-distribution">
+
+                        <div class="risk-row">
+
+                            <span>Safe</span>
+
+                            <div class="distribution-bar">
+
+                                <div class="distribution-fill safe-fill"></div>
+
+                            </div>
+
+                            <strong>62%</strong>
+
+                        </div>
+
+
+                        <div class="risk-row">
+
+                            <span>Medium</span>
+
+                            <div class="distribution-bar">
+
+                                <div class="distribution-fill medium-fill"></div>
+
+                            </div>
+
+                            <strong>28%</strong>
+
+                        </div>
+
+
+                        <div class="risk-row">
+
+                            <span>High</span>
+
+                            <div class="distribution-bar">
+
+                                <div class="distribution-fill high-fill"></div>
+
+                            </div>
+
+                            <strong>10%</strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="insight-panel">
+
+                        <h3>
+                            🧠 System Insight
+                        </h3>
+
+                        <p style="margin:0;color:#64748b;font-size:13px;line-height:1.6;">
+
+                            Weather-related disruptions are currently
+                            contributing to increased route risk across
+                            selected North Eastern corridors.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CORRIDORS + PERFORMANCE -->
+
+            <div class="analytics-grid">
+
+
+                <!-- CRITICAL CORRIDORS -->
+
+                <div class="analytics-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Critical Corridors
+                            </h2>
+
+                            <p>
+                                Routes requiring operational attention
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="corridor-list">
+
+
+                        <div class="corridor-item">
+
+                            <div class="corridor-info">
+
+                                <strong>
+                                    Guwahati → Tawang
+                                </strong>
+
+                                <span>
+                                    Landslide + rainfall impact
+                                </span>
+
+                            </div>
+
+                            <span class="corridor-risk risk-high">
+                                82%
+                            </span>
+
+                        </div>
+
+
+                        <div class="corridor-item">
+
+                            <div class="corridor-info">
+
+                                <strong>
+                                    Gangtok → Siliguri
+                                </strong>
+
+                                <span>
+                                    Weather-related delay
+                                </span>
+
+                            </div>
+
+                            <span class="corridor-risk risk-medium">
+                                56%
+                            </span>
+
+                        </div>
+
+
+                        <div class="corridor-item">
+
+                            <div class="corridor-info">
+
+                                <strong>
+                                    Shillong → Guwahati
+                                </strong>
+
+                                <span>
+                                    Moderate congestion
+                                </span>
+
+                            </div>
+
+                            <span class="corridor-risk risk-medium">
+                                46%
+                            </span>
+
+                        </div>
+
+
+                        <div class="corridor-item">
+
+                            <div class="corridor-info">
+
+                                <strong>
+                                    Kohima Corridor
+                                </strong>
+
+                                <span>
+                                    Normal movement
+                                </span>
+
+                            </div>
+
+                            <span class="corridor-risk risk-low">
+                                18%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FLEET PERFORMANCE -->
+
+                <div class="analytics-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Fleet Performance
+                            </h2>
+
+                            <p>
+                                Current logistics performance
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-grid">
+
+                        <div class="performance-card">
+
+                            <span>
+                                Active Fleet
+                            </span>
+
+                            <strong>
+                                18
+                            </strong>
+
+                            <small>
+                                75% of fleet
+                            </small>
+
+                        </div>
+
+
+                        <div class="performance-card">
+
+                            <span>
+                                Delayed
+                            </span>
+
+                            <strong>
+                                04
+                            </strong>
+
+                            <small>
+                                17% of fleet
+                            </small>
+
+                        </div>
+
+
+                        <div class="performance-card">
+
+                            <span>
+                                Emergency Cargo
+                            </span>
+
+                            <strong>
+                                05
+                            </strong>
+
+                            <small>
+                                Priority monitored
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="insight-panel">
+
+                        <h3>
+                            📦 Cargo Priority
+                        </h3>
+
+                        <p style="margin:0;color:#64748b;font-size:13px;line-height:1.6;">
+
+                            Essential medicines and food supplies
+                            are prioritized when route risk or
+                            predicted delivery delays increase.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPERATIONAL INSIGHTS -->
+
+            <div class="analytics-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            🧠 Operational Insights
+                        </h2>
+
+                        <p>
+                            Key observations from current logistics data
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-list">
+
+                    <div class="insight-item">
+
+                        <span>
+                            ⚠️ Highest Risk
+                        </span>
+
+                        <strong>
+                            Guwahati → Tawang
+                        </strong>
+
+                    </div>
+
+
+                    <div class="insight-item">
+
+                        <span>
+                            🚚 Most Affected Vehicle
+                        </span>
+
+                        <strong>
+                            NER-1024
+                        </strong>
+
+                    </div>
+
+
+                    <div class="insight-item">
+
+                        <span>
+                            🔄 Recommended Action
+                        </span>
+
+                        <strong>
+                            Evaluate alternate corridor
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-disclaimer">
+
+                    <strong>Demo Analytics:</strong>
+
+                    Current metrics and trends are simulated for the
+                    prototype. The final system can calculate analytics
+                    using live GPS, weather, incident, route and delivery
+                    datasets with predictive ML models.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                NER Smart Logistics © 2026
+            </p>
+
+            <p>
+                AI-Based Transportation & Accessibility Intelligence
+            </p>
+
+        </footer>
+
+
+    </main>
+
+</body>
+
+</html>
