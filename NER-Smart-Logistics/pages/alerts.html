@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alerts | NER Smart Logistics</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+
+        /* ================= ALERT PAGE ================= */
+
+        .alerts-page {
+            padding: 24px;
+        }
+
+        .alert-intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .alert-intro h2 {
+            margin: 0 0 6px;
+        }
+
+        .alert-intro p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .live-status {
+            background: #ecfdf5;
+            color: #15803d;
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .alert-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .alert-summary-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+
+            border-left: 4px solid #2563eb;
+        }
+
+        .alert-summary-card:nth-child(1) {
+            border-left-color: #dc2626;
+        }
+
+        .alert-summary-card:nth-child(2) {
+            border-left-color: #f59e0b;
+        }
+
+        .alert-summary-card:nth-child(3) {
+            border-left-color: #2563eb;
+        }
+
+        .alert-summary-card:nth-child(4) {
+            border-left-color: #16a34a;
+        }
+
+        .alert-summary-card span {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .alert-summary-card strong {
+            display: block;
+            font-size: 28px;
+            margin: 5px 0;
+        }
+
+        .alert-summary-card small {
+            color: #94a3b8;
+        }
+
+        /* ================= INTELLIGENCE CHAIN ================= */
+
+        .intelligence-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 22px;
+
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        .panel-header {
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            margin: 0 0 5px;
+        }
+
+        .panel-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .intelligence-chain {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chain-step {
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chain-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .chain-step strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .chain-step span {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .chain-arrow {
+            text-align: center;
+            font-size: 22px;
+            color: #94a3b8;
+        }
+
+        /* ================= ALERT FEED ================= */
+
+        .alerts-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+        }
+
+        .alert-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .alert-card:hover {
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+        }
+
+        .alert-card.high {
+            border-left: 4px solid #dc2626;
+        }
+
+        .alert-card.medium {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .alert-card.info {
+            border-left: 4px solid #2563eb;
+        }
+
+        .alert-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .alert-title {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+        }
+
+        .alert-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+            background: #fee2e2;
+        }
+
+        .alert-icon.warning {
+            background: #fef3c7;
+        }
+
+        .alert-icon.info {
+            background: #dbeafe;
+        }
+
+        .alert-title h3 {
+            margin: 0 0 4px;
+            font-size: 16px;
+        }
+
+        .alert-title span {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .alert-badge {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .badge-high {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-medium {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .alert-message {
+            margin: 15px 0;
+            padding: 13px;
+
+            background: #f8fafc;
+            border-radius: 10px;
+
+            color: #475569;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .alert-impact {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .impact-item {
+            background: #f8fafc;
+            padding: 11px;
+            border-radius: 9px;
+        }
+
+        .impact-item span {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .impact-item strong {
+            font-size: 13px;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 14px;
+        }
+
+        .alert-action {
+            border: none;
+            background: transparent;
+            color: #2563eb;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .alert-action:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= ALERT GENERATOR ================= */
+
+        .generator-panel {
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .generator-panel h3 {
+            margin: 0 0 12px;
+            font-size: 15px;
+        }
+
+        .generator-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .generator-select {
+            flex: 1;
+            padding: 11px;
+            border: 1px solid #dbe2ea;
+            border-radius: 9px;
+            background: white;
+        }
+
+        .generate-btn {
+            border: none;
+            background: #dc2626;
+            color: white;
+            padding: 0 18px;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .generate-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* ================= DISCLAIMER ================= */
+
+        .alert-disclaimer {
+            margin-top: 18px;
+
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+
+            padding: 14px 16px;
+            border-radius: 10px;
+
+            color: #475569;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .alert-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .intelligence-chain {
+                grid-template-columns: 1fr;
+            }
+
+            .chain-arrow {
+                transform: rotate(90deg);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .alert-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .alert-card-top {
+                flex-direction: column;
+            }
+
+            .alert-impact {
+                grid-template-columns: 1fr;
+            }
+
+            .generator-row {
+                flex-direction: column;
+            }
+
+            .generate-btn {
+                height: 42px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                NER
+            </div>
+
+            <div>
+                <h2>Smart Logistics</h2>
+                <span>North Eastern Region</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="../index.html" class="nav-item">
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="map.html" class="nav-item">
+                <span>🗺️</span>
+                <span>Live Map</span>
+            </a>
+
+            <a href="vehicles.html" class="nav-item">
+                <span>🚚</span>
+                <span>Vehicle Tracking</span>
+            </a>
+
+            <a href="routes.html" class="nav-item">
+                <span>🛣️</span>
+                <span>Routes</span>
+            </a>
+
+            <a href="incidents.html" class="nav-item">
+                <span>🚨</span>
+                <span>Incidents</span>
+            </a>
+
+            <a href="alerts.html" class="nav-item active">
+                <span>🔔</span>
+                <span>Alerts</span>
+            </a>
+
+            <a href="analytics.html" class="nav-item">
+    <span>📊</span>
+    <span>Analytics</span>
+</a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Monitoring active</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Smart Alerts</h1>
+
+                <p>
+                    Predictive logistics warnings and operational notifications
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="alertSearch"
+                        placeholder="Search alerts..."
+                    >
+
+                </div>
+
+
+                <button class="notification-btn">
+
+                    🔔
+
+                    <span class="notification-count">
+                        5
+                    </span>
+
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-icon">
+                        OP
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Operations
+                        </strong>
+
+                        <small>
+                            Control Room
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= PAGE ================= -->
+
+        <section class="alerts-page">
+
+
+            <!-- INTRO -->
+
+            <div class="alert-intro">
+
+                <div>
+
+                    <h2>
+                        Operational Alerts
+                    </h2>
+
+                    <p>
+                        Early warnings for route disruptions,
+                        vehicle delays and critical cargo.
+                    </p>
+
+                </div>
+
+                <span class="live-status">
+                    ● Alert engine active
+                </span>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="alert-summary">
+
+                <div class="alert-summary-card">
+
+                    <span>
+                        Active Alerts
+                    </span>
+
+                    <strong>
+                        08
+                    </strong>
+
+                    <small>
+                        Requiring attention
+                    </small>
+
+                </div>
+
+
+                <div class="alert-summary-card">
+
+                    <span>
+                        Critical
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Immediate action
+                    </small>
+
+                </div>
+
+
+                <div class="alert-summary-card">
+
+                    <span>
+                        Vehicles Affected
+                    </span>
+
+                    <strong>
+                        06
+                    </strong>
+
+                    <small>
+                        Current alerts
+                    </small>
+
+                </div>
+
+
+                <div class="alert-summary-card">
+
+                    <span>
+                        Alerts Resolved
+                    </span>
+
+                    <strong>
+                        14
+                    </strong>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- INTELLIGENCE CHAIN -->
+
+            <div class="intelligence-panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        🧠 Predictive Alert Chain
+                    </h2>
+
+                    <p>
+                        Example of how the platform converts disruptions
+                        into logistics actions.
+                    </p>
+
+                </div>
+
+
+                <div class="intelligence-chain">
+
+                    <div class="chain-step">
+
+                        <div class="chain-icon">
+                            🌧️
+                        </div>
+
+                        <strong>
+                            Heavy Rain
+                        </strong>
+
+                        <span>
+                            Weather signal
+                        </span>
+
+                    </div>
+
+
+                    <div class="chain-arrow">
+                        →
+                    </div>
+
+
+                    <div class="chain-step">
+
+                        <div class="chain-icon">
+                            ⚠️
+                        </div>
+
+                        <strong>
+                            Risk Increase
+                        </strong>
+
+                        <span>
+                            Route risk 28% → 72%
+                        </span>
+
+                    </div>
+
+
+                    <div class="chain-arrow">
+                        →
+                    </div>
+
+
+                    <div class="chain-step">
+
+                        <div class="chain-icon">
+                            🚚
+                        </div>
+
+                        <strong>
+                            Vehicle Affected
+                        </strong>
+
+                        <span>
+                            NER-1024
+                        </span>
+
+                    </div>
+
+
+                    <div class="chain-arrow">
+                        →
+                    </div>
+
+
+                    <div class="chain-step">
+
+                        <div class="chain-icon">
+                            🔄
+                        </div>
+
+                        <strong>
+                            Reroute
+                        </strong>
+
+                        <span>
+                            Alternate corridor
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALERT FEED -->
+
+            <div class="alerts-panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        🔔 Alert Feed
+                    </h2>
+
+                    <p>
+                        Latest system-generated operational warnings
+                    </p>
+
+                </div>
+
+
+                <!-- ALERT 1 -->
+
+                <div class="alert-card high">
+
+                    <div class="alert-card-top">
+
+                        <div class="alert-title">
+
+                            <div class="alert-icon">
+                                🚨
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Critical Route Risk
+                                </h3>
+
+                                <span>
+                                    Guwahati → Tawang
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="alert-badge badge-high">
+                            CRITICAL
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-message">
+
+                        ⚠️ Route risk has increased to
+                        <strong>82%</strong> due to heavy rainfall
+                        and a reported landslide near the corridor.
+
+                        Alternate route is recommended for critical cargo.
+
+                    </div>
+
+
+                    <div class="alert-impact">
+
+                        <div class="impact-item">
+
+                            <span>
+                                🚚 Vehicle
+                            </span>
+
+                            <strong>
+                                NER-1024
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                📦 Cargo
+                            </span>
+
+                            <strong>
+                                Essential Medicines
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                ⏱️ Expected Delay
+                            </span>
+
+                            <strong>
+                                +75 min
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            class="alert-action"
+                            onclick="viewAlert('Critical Route Risk')"
+                        >
+                            View Alert →
+                        </button>
+
+                        <button
+                            class="alert-action"
+                            onclick="rerouteVehicle('NER-1024')"
+                        >
+                            Suggest Alternate Route
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERT 2 -->
+
+                <div class="alert-card medium">
+
+                    <div class="alert-card-top">
+
+                        <div class="alert-title">
+
+                            <div class="alert-icon warning">
+                                🌧️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Weather Risk Detected
+                                </h3>
+
+                                <span>
+                                    Gangtok Corridor
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="alert-badge badge-medium">
+                            WARNING
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-message">
+
+                        Heavy rainfall is expected to reduce
+                        vehicle speed and may increase travel time
+                        on the Gangtok corridor.
+
+                    </div>
+
+
+                    <div class="alert-impact">
+
+                        <div class="impact-item">
+
+                            <span>
+                                🛣️ Route Risk
+                            </span>
+
+                            <strong>
+                                56%
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                🚚 Vehicles
+                            </span>
+
+                            <strong>
+                                3
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                ⏱️ Delay
+                            </span>
+
+                            <strong>
+                                +25 min
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            class="alert-action"
+                            onclick="viewAlert('Gangtok Weather Risk')"
+                        >
+                            View Alert →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERT 3 -->
+
+                <div class="alert-card info">
+
+                    <div class="alert-card-top">
+
+                        <div class="alert-title">
+
+                            <div class="alert-icon info">
+                                🔄
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Alternate Route Available
+                                </h3>
+
+                                <span>
+                                    Shillong → Guwahati
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="alert-badge badge-info">
+                            ACTION
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-message">
+
+                        The system has identified an alternate
+                        corridor with lower estimated disruption risk
+                        for the current transport condition.
+
+                    </div>
+
+
+                    <div class="alert-impact">
+
+                        <div class="impact-item">
+
+                            <span>
+                                🛣️ Primary Risk
+                            </span>
+
+                            <strong>
+                                64%
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                🔄 Alternate Risk
+                            </span>
+
+                            <strong>
+                                31%
+                            </strong>
+
+                        </div>
+
+                        <div class="impact-item">
+
+                            <span>
+                                📦 Priority
+                            </span>
+
+                            <strong>
+                                Food Supplies
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            class="alert-action"
+                            onclick="rerouteVehicle('Food Supply Fleet')"
+                        >
+                            Apply Demo Reroute →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERT GENERATOR -->
+
+                <div class="generator-panel">
+
+                    <h3>
+                        ⚡ Demo Alert Simulator
+                    </h3>
+
+                    <div class="generator-row">
+
+                        <select
+                            class="generator-select"
+                            id="alertType"
+                        >
+
+                            <option value="rain">
+                                Heavy Rainfall
+                            </option>
+
+                            <option value="landslide">
+                                Landslide
+                            </option>
+
+                            <option value="flood">
+                                Flooded Road
+                            </option>
+
+                            <option value="congestion">
+                                Traffic Congestion
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            class="generate-btn"
+                            onclick="generateAlert()"
+                        >
+                            Generate Alert
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DISCLAIMER -->
+
+                <div class="alert-disclaimer">
+
+                    <strong>Demo Intelligence:</strong>
+
+                    Alerts shown above are simulated for the prototype.
+                    In the final platform, the alert engine can combine
+                    live weather, road incidents, GPS vehicle data,
+                    route accessibility and predictive ML models.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                NER Smart Logistics © 2026
+            </p>
+
+            <p>
+                AI-Based Transportation & Accessibility Intelligence
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= SEARCH ================= */
+
+        const searchInput =
+            document.getElementById("alertSearch");
+
+        const alertCards =
+            document.querySelectorAll(".alert-card");
+
+
+        searchInput.addEventListener(
+            "input",
+            function() {
+
+                const value =
+                    this.value.toLowerCase();
+
+                alertCards.forEach(function(card) {
+
+                    const text =
+                        card.innerText.toLowerCase();
+
+                    card.style.display =
+                        text.includes(value)
+                            ? "block"
+                            : "none";
+
+                });
+
+            }
+        );
+
+
+        /* ================= VIEW ALERT ================= */
+
+        function viewAlert(name) {
+
+            alert(
+                `Smart Logistics Alert\n\n` +
+                `${name}\n\n` +
+                `✓ Risk detected\n` +
+                `✓ Route impact evaluated\n` +
+                `✓ Vehicle impact checked\n` +
+                `✓ Delay estimated\n` +
+                `✓ Operational action generated\n\n` +
+                `Live notification delivery will be connected in the backend stage.`
+            );
+
+        }
+
+
+        /* ================= REROUTE ================= */
+
+        function rerouteVehicle(vehicle) {
+
+            alert(
+                `Alternate Route Recommendation\n\n` +
+                `Target: ${vehicle}\n\n` +
+                `Primary route risk is elevated.\n\n` +
+                `Recommended action:\n` +
+                `🔄 Switch to alternate corridor\n` +
+                `⏱️ Recalculate ETA\n` +
+                `📍 Continue GPS monitoring\n\n` +
+                `This is a simulated prototype action.`
+            );
+
+        }
+
+
+        /* ================= ALERT GENERATOR ================= */
+
+        function generateAlert() {
+
+            const type =
+                document.getElementById(
+                    "alertType"
+                ).value;
+
+
+            const messages = {
+
+                rain:
+                    "Heavy rainfall detected. Route accessibility risk may increase.",
+
+                landslide:
+                    "Potential landslide detected. Immediate route assessment recommended.",
+
+                flood:
+                    "Flooded road section reported. Alternate corridor should be evaluated.",
+
+                congestion:
+                    "Traffic congestion detected. Estimated delivery delay may increase."
+
+            };
+
+
+            alert(
+                `🚨 DEMO ALERT GENERATED\n\n` +
+                `${messages[type]}\n\n` +
+                `The alert engine would now evaluate affected vehicles, routes and cargo priorities.`
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

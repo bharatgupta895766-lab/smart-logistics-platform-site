@@ -1,0 +1,692 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NER Smart Logistics</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">NER</div>
+
+            <div>
+                <h2>Smart Logistics</h2>
+                <span>North Eastern Region</span>
+            </div>
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+    <a href="index.html" class="nav-item active">
+        <span>🏠</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="pages/map.html" class="nav-item">
+        <span>🗺️</span>
+        <span>Live Map</span>
+    </a>
+
+    <a href="pages/vehicles.html" class="nav-item">
+        <span>🚚</span>
+        <span>Vehicle Tracking</span>
+    </a>
+
+    <a href="pages/routes.html" class="nav-item">
+        <span>🛣️</span>
+        <span>Routes</span>
+    </a>
+
+    <a href="pages/incidents.html" class="nav-item">
+        <span>🚨</span>
+        <span>Incidents</span>
+    </a>
+
+    <a href="pages/alerts.html" class="nav-item">
+        <span>🔔</span>
+        <span>Alerts</span>
+    </a>
+
+    <a href="pages/analytics.html" class="nav-item">
+        <span>📊</span>
+        <span>Analytics</span>
+    </a>
+
+</nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Monitoring active</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Transportation & Logistics Intelligence</p>
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input
+                        type="text"
+                        placeholder="Search location, vehicle..."
+                    >
+                </div>
+
+
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-count">3</span>
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-icon">
+                        OP
+                    </div>
+
+                    <div>
+                        <strong>Operations</strong>
+                        <small>Control Room</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="dashboard">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome-section">
+
+                <div>
+                    <h2>NER Transportation Overview</h2>
+
+                    <p>
+                        Monitor vehicles, routes, incidents and
+                        regional accessibility in real time.
+                    </p>
+                </div>
+
+                <div class="last-updated">
+                    Last updated: <strong>Just now</strong>
+                </div>
+
+            </div>
+
+
+            <!-- ================= STAT CARDS ================= -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon vehicle">
+                        🚚
+                    </div>
+
+                    <div>
+                        <p>Total Vehicles</p>
+                        <h3 id="vehicleCount">86</h3>
+                        <span class="positive">
+                            ● 72 Active
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon alert">
+                        🔔
+                    </div>
+
+                    <div>
+                        <p>Active Alerts</p>
+                        <h3 id="alertCount">08</h3>
+                        <span class="negative">
+                            ● 2 Critical
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon route">
+                        🛣️
+                    </div>
+
+                    <div>
+                        <p>Routes at Risk</p>
+                        <h3 id="riskRouteCount">05</h3>
+                        <span class="warning">
+                            ● Monitoring
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon incident">
+                        🚨
+                    </div>
+
+                    <div>
+                        <p>Active Incidents</p>
+                        <h3 id="incidentCount">12</h3>
+                        <span class="negative">
+                            ● 4 High Priority
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= MAIN GRID ================= -->
+
+            <div class="content-grid">
+
+
+                <!-- REGIONAL STATUS -->
+
+                <div class="panel regional-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Regional Accessibility</h2>
+                            <p>Current monitoring status</p>
+                        </div>
+
+                        <button class="view-btn">
+                            View Map →
+                        </button>
+
+                    </div>
+
+
+                    <div class="region-list">
+
+
+                        <div class="region-row">
+
+                            <div class="region-info">
+                                <span class="region-dot safe"></span>
+
+                                <div>
+                                    <strong>Assam</strong>
+                                    <small>Major routes accessible</small>
+                                </div>
+                            </div>
+
+                            <span class="region-status safe-text">
+                                LOW RISK
+                            </span>
+
+                        </div>
+
+
+                        <div class="region-row">
+
+                            <div class="region-info">
+                                <span class="region-dot warning-dot"></span>
+
+                                <div>
+                                    <strong>Meghalaya</strong>
+                                    <small>Weather-related risk</small>
+                                </div>
+                            </div>
+
+                            <span class="region-status warning-text">
+                                MEDIUM
+                            </span>
+
+                        </div>
+
+
+                        <div class="region-row">
+
+                            <div class="region-info">
+                                <span class="region-dot danger"></span>
+
+                                <div>
+                                    <strong>Sikkim</strong>
+                                    <small>Route disruption reported</small>
+                                </div>
+                            </div>
+
+                            <span class="region-status danger-text">
+                                HIGH
+                            </span>
+
+                        </div>
+
+
+                        <div class="region-row">
+
+                            <div class="region-info">
+                                <span class="region-dot safe"></span>
+
+                                <div>
+                                    <strong>Arunachal Pradesh</strong>
+                                    <small>Normal accessibility</small>
+                                </div>
+                            </div>
+
+                            <span class="region-status safe-text">
+                                LOW RISK
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT ALERTS -->
+
+                <div class="panel alerts-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Recent Alerts</h2>
+                            <p>Latest system notifications</p>
+                        </div>
+
+                        <button class="view-btn">
+                            View All →
+                        </button>
+
+                    </div>
+
+
+                    <div class="alert-list">
+
+
+                        <div class="alert-row">
+
+                            <div class="alert-symbol critical">
+                                🚧
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>Road obstruction reported</strong>
+
+                                <span>
+                                    Route condition requires attention
+                                </span>
+
+                                <small>
+                                    5 minutes ago
+                                </small>
+
+                            </div>
+
+                            <span class="severity critical-text">
+                                CRITICAL
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-row">
+
+                            <div class="alert-symbol weather">
+                                🌧️
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>Heavy rainfall warning</strong>
+
+                                <span>
+                                    Weather risk detected
+                                </span>
+
+                                <small>
+                                    12 minutes ago
+                                </small>
+
+                            </div>
+
+                            <span class="severity warning-text">
+                                WARNING
+                            </span>
+
+                        </div>
+
+
+                        <div class="alert-row">
+
+                            <div class="alert-symbol vehicle-alert">
+                                🚚
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>Vehicle delay detected</strong>
+
+                                <span>
+                                    Delivery ETA has increased
+                                </span>
+
+                                <small>
+                                    20 minutes ago
+                                </small>
+
+                            </div>
+
+                            <span class="severity warning-text">
+                                WARNING
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= DEMO INTELLIGENCE ================= -->
+
+            <div class="panel" id="demoPanel" style="margin-top:24px;">
+                <div class="panel-header">
+                    <div>
+                        <h2>Predictive Logistics Intelligence</h2>
+                        <p>Simulated disruption impact for the judge demo</p>
+                    </div>
+                    <span id="systemRiskBadge"
+                          style="padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800;
+                                 background:#e8f7ee;color:#167a45;">
+                        SYSTEM STABLE
+                    </span>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch;">
+                    <div style="border:1px solid #e5e7eb;border-radius:14px;padding:20px;background:#fafbfc;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+                            <div>
+                                <div style="font-size:12px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">
+                                    Corridor
+                                </div>
+                                <h3 style="margin:6px 0 4px;">Guwahati → Tawang</h3>
+                                <p id="demoRouteText" style="margin:0;color:#6b7280;">
+                                    Primary route currently monitored
+                                </p>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:12px;color:#6b7280;">Risk Score</div>
+                                <div id="riskScore" style="font-size:34px;font-weight:800;">32%</div>
+                            </div>
+                        </div>
+
+                        <div style="margin:20px 0 8px;height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;">
+                            <div id="riskBar" style="height:100%;width:32%;background:#1f9d55;border-radius:99px;transition:width .5s ease;"></div>
+                        </div>
+
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;">
+                            <div style="padding:12px;border-radius:10px;background:#fff;border:1px solid #eef0f2;">
+                                <small style="color:#6b7280;">Weather</small>
+                                <strong id="weatherValue" style="display:block;margin-top:4px;">Normal</strong>
+                            </div>
+                            <div style="padding:12px;border-radius:10px;background:#fff;border:1px solid #eef0f2;">
+                                <small style="color:#6b7280;">Road Status</small>
+                                <strong id="roadValue" style="display:block;margin-top:4px;">Accessible</strong>
+                            </div>
+                            <div style="padding:12px;border-radius:10px;background:#fff;border:1px solid #eef0f2;">
+                                <small style="color:#6b7280;">Vehicle Impact</small>
+                                <strong id="vehicleImpact" style="display:block;margin-top:4px;">None</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="border:1px solid #e5e7eb;border-radius:14px;padding:20px;background:#fff;">
+                        <div style="font-size:12px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">
+                            Recommended Action
+                        </div>
+                        <h3 id="demoActionTitle" style="margin:8px 0;">Continue primary route</h3>
+                        <p id="demoActionText" style="color:#6b7280;line-height:1.6;">
+                            Current conditions are within acceptable limits.
+                        </p>
+
+                        <button id="simulateRainBtn"
+                                style="width:100%;border:0;border-radius:10px;padding:13px 16px;
+                                       font-weight:800;cursor:pointer;background:#172033;color:#fff;">
+                            🌧️ Simulate Heavy Rainfall
+                        </button>
+
+                        <button id="resetDemoBtn"
+                                style="width:100%;margin-top:10px;border:1px solid #d1d5db;border-radius:10px;
+                                       padding:11px 16px;font-weight:700;cursor:pointer;background:#fff;color:#172033;">
+                            Reset Simulation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= CRITICAL DELIVERIES ================= -->
+
+            <div class="panel" style="margin-top:24px;">
+                <div class="panel-header">
+                    <div>
+                        <h2>Critical Deliveries</h2>
+                        <p>Priority cargo requiring active monitoring</p>
+                    </div>
+                    <button class="view-btn">Track All →</button>
+                </div>
+
+                <div style="overflow-x:auto;">
+                    <table style="width:100%;border-collapse:collapse;">
+                        <thead>
+                            <tr style="text-align:left;border-bottom:1px solid #e5e7eb;">
+                                <th style="padding:12px 8px;">Delivery</th>
+                                <th style="padding:12px 8px;">Cargo</th>
+                                <th style="padding:12px 8px;">Corridor</th>
+                                <th style="padding:12px 8px;">ETA</th>
+                                <th style="padding:12px 8px;">Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid #f0f1f3;">
+                                <td style="padding:14px 8px;font-weight:700;">NER-1024</td>
+                                <td style="padding:14px 8px;">Essential medicines</td>
+                                <td style="padding:14px 8px;">Guwahati → Tawang</td>
+                                <td style="padding:14px 8px;">3h 25m</td>
+                                <td style="padding:14px 8px;"><span style="font-weight:800;color:#b45309;">HIGH</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 8px;font-weight:700;">NER-1041</td>
+                                <td style="padding:14px 8px;">Food supplies</td>
+                                <td style="padding:14px 8px;">Shillong → Jowai</td>
+                                <td style="padding:14px 8px;">2h 10m</td>
+                                <td style="padding:14px 8px;"><span style="font-weight:800;color:#167a45;">LOW</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= QUICK ACTIONS ================= -->
+
+            <div class="panel quick-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Frequently used operations</p>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <a class="quick-action" href="map.html" style="text-decoration:none;">
+                        🗺️
+                        <span>Open Live Map</span>
+                    </a>
+
+                    <button class="quick-action">
+                        🚨
+                        <span>Report Incident</span>
+                    </button>
+
+                    <a class="quick-action" href="vehicles.html" style="text-decoration:none;">
+                        🚚
+                        <span>Track Vehicles</span>
+                    </a>
+
+                    <a class="quick-action" href="routes.html" style="text-decoration:none;">
+                        🛣️
+                        <span>Check Routes</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                NER Smart Logistics © 2026
+            </p>
+
+            <p>
+                AI-Based Transportation & Accessibility Intelligence
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+
+    <script>
+        const simulateRainBtn = document.getElementById("simulateRainBtn");
+        const resetDemoBtn = document.getElementById("resetDemoBtn");
+
+        function setDemoState(rainMode) {
+            const riskScore = document.getElementById("riskScore");
+            const riskBar = document.getElementById("riskBar");
+            const weatherValue = document.getElementById("weatherValue");
+            const roadValue = document.getElementById("roadValue");
+            const vehicleImpact = document.getElementById("vehicleImpact");
+            const actionTitle = document.getElementById("demoActionTitle");
+            const actionText = document.getElementById("demoActionText");
+            const routeText = document.getElementById("demoRouteText");
+            const badge = document.getElementById("systemRiskBadge");
+            const alertCount = document.getElementById("alertCount");
+            const riskRouteCount = document.getElementById("riskRouteCount");
+
+            if (rainMode) {
+                riskScore.textContent = "82%";
+                riskBar.style.width = "82%";
+                riskBar.style.background = "#dc2626";
+                weatherValue.textContent = "Heavy rainfall";
+                roadValue.textContent = "High risk";
+                vehicleImpact.textContent = "NER-1024 affected";
+                actionTitle.textContent = "Use alternate route";
+                actionText.textContent = "Rainfall raises corridor risk. Reroute critical medicine delivery and alert the control room.";
+                routeText.textContent = "Primary route risk increased after simulated weather event";
+                badge.textContent = "CRITICAL RISK";
+                badge.style.background = "#fee2e2";
+                badge.style.color = "#b91c1c";
+                alertCount.textContent = "09";
+                riskRouteCount.textContent = "06";
+                simulateRainBtn.textContent = "🌧️ Rainfall Event Active";
+            } else {
+                riskScore.textContent = "32%";
+                riskBar.style.width = "32%";
+                riskBar.style.background = "#1f9d55";
+                weatherValue.textContent = "Normal";
+                roadValue.textContent = "Accessible";
+                vehicleImpact.textContent = "None";
+                actionTitle.textContent = "Continue primary route";
+                actionText.textContent = "Current conditions are within acceptable limits.";
+                routeText.textContent = "Primary route currently monitored";
+                badge.textContent = "SYSTEM STABLE";
+                badge.style.background = "#e8f7ee";
+                badge.style.color = "#167a45";
+                alertCount.textContent = "08";
+                riskRouteCount.textContent = "05";
+                simulateRainBtn.textContent = "🌧️ Simulate Heavy Rainfall";
+            }
+        }
+
+        simulateRainBtn?.addEventListener("click", () => setDemoState(true));
+        resetDemoBtn?.addEventListener("click", () => setDemoState(false));
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
